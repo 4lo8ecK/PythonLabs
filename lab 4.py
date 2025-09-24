@@ -2,18 +2,22 @@
 # Вариант 6
 # Гаврилов Павел ФМ 11-25
 # Код к каждому заданию как для отдельной программы
+print("# Лабораторная работа №4\nВариант 6\nГаврилов Павел ФМ 11-25\nКод к каждому заданию как для отдельной программы\n")
+import math
 
 # Задание 1
+print("\nЗадание 1")
 
+print("Введите число: ", end='')
 x = float(input())
-
+print("Результат = ",end='')
 if x < -1:
     print(0)
 elif -1 <= x < 0:
     print(1)
 elif 0 <= x < 2:
     print(-1)
-elif x <= 2:
+elif x >= 2:
     print(1)
 
 
@@ -25,8 +29,7 @@ elif x <= 2:
 дятся. Вывести значение функции. При вводе значений обязательны поясняющие
 надписи! (в input()). При выводе значения тоже сделать поясняющие подписи (в print).
 """
-"""
-import math
+print("\nЗадание 2")
 
 print("Введите x: ", end='')
 x = float(input())
@@ -47,12 +50,12 @@ if math.exp(a + b) < math.exp(x):
 elif math.exp(a + b) == math.exp(x):
     res = math.atan(a * b * c) + (x ** (1/3))
 
-elif math.exp(a + b) < math.exp(x):
+elif math.exp(a + b) > math.exp(x):
     res = math.cos(math.sqrt(abs(x + (a * b * c))))
 
-print("Результат вычислений: ", end='')
-print(res)
-"""
+
+print(f"Результат вычислений: {res}")
+
 
 
 # Задание 3
@@ -60,7 +63,10 @@ print(res)
 Задание 3 Вычислить значение функции в точке x. Значение x ввести с клавиатуры.
 Точку разрыва обработать отдельно. В тетради расписать все функции!
 """
-import math
+
+print("\nЗадание 3")
+print("Это программа выдаёт значения функции по оси OY")
+print("Введите значение по OX в диапазоне от -9 до 9 включительно")
 
 def get_circle_y(input_x, circle_x, circle_y, circle_rad) -> float:
     return -1 * (math.sqrt(abs((circle_rad ** 2) - ((input_x - circle_x) ** 2 ))) - circle_y)
@@ -72,9 +78,6 @@ def get_line_y(x, k, b) -> float:
     return k * x + b
 # get_line_y
 
-
-print("Это программа выдаёт значения функции по оси OY")
-print("Введите значение по OX в диапазоне от -9 до 9 включительно")
 print("x = ", end='')
 x = float(input())
 
@@ -107,9 +110,11 @@ print(f"При x = {round(x, 4)}, y = {round(calculate(x), 4)}")
 
 # тест
 # проверка значений в заданном диапазоне с шагом в 0.1
+
 """
 i = -9.0    
 while i <= 9.0:
     print(f"При x = {round(i, 4)}, y = {round(calculate(i), 4)}")
     i += 0.1
+
 """
