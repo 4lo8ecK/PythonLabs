@@ -18,11 +18,11 @@ import os
 # 1 - внутри
 # 2 - снаружи
 def circle(x: float, y: float, a: float, b: float) -> int:
-    inside = (x - a)**2 + (y - b)**2 < 1
+    inside = (x - a)**2 + (y - b)**2 <= 1
     outside = (x - a)**2 + (y - b)**2 > 1
-    bound = (x - a)**2 + (y - b)**2 == 1
-    if bound: return 0
-    elif inside: return 1
+    #bound = (x - a)**2 + (y - b)**2 == 1
+    #if bound: return 0
+    if inside: return 1
     elif outside: return 2
     else: return 3
 # !circle(float, float, float, float) -> int
@@ -49,10 +49,23 @@ while True:
     M4: float = ((-1 <= in_y <= 1) and (-1 <= in_x <= 0)) and (fifth == 1 and not(third == 1 and forth == 1))
     M5: float = ((-2 <= in_y < 0) and (0 <= in_x <= 1)) and not(fifth == 1 and second == 1)
 
-    print("M1:",M1)
-    print("M2:",M2)
-    print("M3:",M3)
-    print("M4:",M4)
-    print("M5:",M5)
+    if M1:
+        print("Точка в области M1")
+    elif M2:
+        print("Точка в области M2")
+    elif M3:
+        print("Точка в области M3")
+    elif M4:
+        print("Точка в области M4")
+    elif M5:
+        print("Точка в области M5")
+    else:
+        print("Точка вне любой из областей")
+
+#    print("M1:",M1)
+#    print("M2:",M2)
+#    print("M3:",M3)
+#    print("M4:",M4)
+#    print("M5:",M5)
 
     if (input() == 'exit'): exit(0) 
