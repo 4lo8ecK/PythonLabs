@@ -86,7 +86,7 @@ def calculate(x):
         if -9 <= x < -7:
             res = get_circle_y(x, -9, -5, 1)
         elif -8 <= x < -7:
-            res = get_circle_y(x, -9, -5, 1)
+            res = get_circle_y(x, -8, -4, 1)
         elif -7 <= x < -2:
             res = get_line_y(x, -0.6, -8.2)
         elif -2 <= x < 3:
