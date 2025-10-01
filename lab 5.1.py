@@ -34,7 +34,6 @@ def tris(x: float, y: float, b1: float, b2: float, y0: float, x1: float, x2: flo
 # 3rd: y = 5, y = x + 3, y = -x + 9
 
 def main():
-
     input_x = input('Введите x: ')
     input_y = input('Введите y: ')
 
