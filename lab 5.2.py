@@ -14,18 +14,13 @@ import os
 
 # (x - a)**2 - (y - b)**2 = R**2
 
-# 0 - на границе
-# 1 - внутри
-# 2 - снаружи
-def circle(x: float, y: float, a: float, b: float) -> int:
-    inside = (x - a)**2 + (y - b)**2 <= 1
-    outside = (x - a)**2 + (y - b)**2 > 1
-    #bound = (x - a)**2 + (y - b)**2 == 1
-    #if bound: return 0
-    if inside: return 1
-    elif outside: return 2
-    else: return 3
-# !circle(float, float, float, float) -> int
+# True - внутри / на границе
+# False - снаружи
+def circle(x: float, y: float, a: float, b: float) -> bool:
+    inside = ((x - a)**2 + (y - b)**2) <= 1
+    if inside: return True
+    else: return False
+# !circle(float, float, float, float) -> bool
 
 while True:
     os.system('cls')
@@ -34,8 +29,13 @@ while True:
         exit(0)
     in_y = input()
 
-    in_x = float(in_x)
-    in_y = float(in_y)
+    try:
+        in_x = float(in_x)
+        in_y = float(in_y)
+    except ValueError:
+        print("Неверный ввод!")
+        input()
+        continue
 
     first = circle(in_x, in_y, 0, 1)    
     second = circle(in_x, in_y, 1, 0)    
@@ -43,13 +43,15 @@ while True:
     forth = circle(in_x, in_y, -1, 0)    
     fifth = circle(in_x, in_y, 0, 0)    
 
-    M1: float = ((-2 <= in_x < 0) and (0 < in_y <= 2)) and not(first == 1 and forth == 1)
-    M2: float = ((1 <= in_x <= 2) and (0 <= in_y <= 2)) and not(first == 1 and second == 1)
-    M3: float = ((0 <= in_y <= 1) and (0 <= in_x <= 1)) and (first == 1 and second == 1 and fifth == 1)
-    M4: float = ((-1 <= in_y <= 1) and (-1 <= in_x <= 0)) and (fifth == 1 and not(third == 1 and forth == 1))
-    M5: float = ((-2 <= in_y < 0) and (0 <= in_x <= 1)) and not(fifth == 1 and second == 1)
-
-    if M1:
+    M1: float = ((-2 <= in_x < 0) and (0 < in_y <= 2)) and not(first and forth)
+    M2: float = ((1 <= in_x <= 2) and (0 <= in_y <= 2)) and not(first and second)
+    M3: float = ((0 <= in_y <= 1) and (0 <= in_x <= 1)) and (first and second and fifth)
+    M4: float = ((-1 <= in_y <= 1) and (-1 <= in_x <= 0)) and (fifth and not(third and forth))
+    M5: float = ((-2 <= in_y < 0) and (0 <= in_x <= 1)) and not(fifth and second)
+    
+    if in_x == 0.0 and in_y == 0.0:
+        print("Точка в областях M3 и M4")
+    elif M1:
         print("Точка в области M1")
     elif M2:
         print("Точка в области M2")
@@ -61,11 +63,5 @@ while True:
         print("Точка в области M5")
     else:
         print("Точка вне любой из областей")
-
-#    print("M1:",M1)
-#    print("M2:",M2)
-#    print("M3:",M3)
-#    print("M4:",M4)
-#    print("M5:",M5)
 
     if (input() == 'exit'): exit(0) 
