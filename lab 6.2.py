@@ -14,13 +14,14 @@ import os
 
 def main():
     N = input("Введите число: ")
-    
-    if N == 'exit' or N == '':
-        exit(0)
+    if N == 'exit' or N == '': exit(0)
+
     try:
         N = int(N)
+
     except ValueError:
         print("Нужно ввести число")
+        
     finally:
         x = 1
         if N % 2 == 0:
@@ -40,5 +41,4 @@ def main():
 while True:
     os.system('cls')
     main()
-    if(input() == 'exit'):
-        exit(0)
+    if input() == 'exit': exit(0)
