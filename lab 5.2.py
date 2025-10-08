@@ -43,11 +43,11 @@ while True:
     forth = circle(in_x, in_y, -1, 0)    
     fifth = circle(in_x, in_y, 0, 0)    
 
-    M1: float = ((-2 <= in_x < 0) and (0 < in_y <= 2)) and not(first and forth)
-    M2: float = ((1 <= in_x <= 2) and (0 <= in_y <= 2)) and not(first and second)
-    M3: float = ((0 <= in_y <= 1) and (0 <= in_x <= 1)) and (first and second and fifth)
-    M4: float = ((-1 <= in_y <= 1) and (-1 <= in_x <= 0)) and (fifth and not(third and forth))
-    M5: float = ((-2 <= in_y < 0) and (0 <= in_x <= 1)) and not(fifth and second)
+    M1: bool = ((-2 <= in_x < 0) and (0 < in_y <= 2)) and not(first and forth)
+    M2: bool = ((1 <= in_x <= 2) and (0 <= in_y <= 2)) and not(first and second)
+    M3: bool = ((0 <= in_y <= 1) and (0 <= in_x <= 1)) and (first and second and fifth)
+    M4: bool = ((-1 <= in_y <= 1) and (-1 <= in_x <= 0)) and (fifth and not(third and forth))
+    M5: bool = ((-2 <= in_y < 0) and (0 <= in_x <= 1)) and not(fifth and second)
     
     if in_x == 0.0 and in_y == 0.0:
         print("Точка в областях M3 и M4")
