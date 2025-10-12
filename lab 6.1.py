@@ -6,6 +6,15 @@
 # Является ли заданное натуральное число степенью двойки?
 import os
 
+def clear_console():
+    # если запускается на unix системах: macOS, linux
+    if os.name == 'posix':
+        os.system('clear')
+    # если запускается на windows
+    elif os.name == 'nt':
+        os.system('cls')
+
+
 def main():
     number = input()
     if number == 'exit':
@@ -25,7 +34,7 @@ def main():
             
 
 while(True):
-    os.system('cls')
+    clear_console()
     main()
     if(input() == 'exit'):
         exit(0)

@@ -12,6 +12,14 @@
 
 import os
 
+def clear_console():
+    # если запускается на unix системах: macOS, linux
+    if os.name == 'posix':
+        os.system('clear')
+    # если запускается на windows
+    elif os.name == 'nt':
+        os.system('cls')
+
 # (x - a)**2 - (y - b)**2 = R**2
 
 # True - внутри / на границе
@@ -23,7 +31,7 @@ def circle(x: float, y: float, a: float, b: float) -> bool:
 # !circle(float, float, float, float) -> bool
 
 while True:
-    os.system('cls')
+    clear_console()
     in_x = input()
     if in_x == 'exit':
         exit(0)

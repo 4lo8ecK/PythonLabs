@@ -11,6 +11,14 @@
 
 import os
 
+def clear_console():
+    # если запускается на unix системах: macOS, linux
+    if os.name == 'posix':
+        os.system('clear')
+    # если запускается на windows
+    elif os.name == 'nt':
+        os.system('cls')
+
 # 0 - внутри фигуры
 # 1 - на границе
 # 2 - вне фигуры
@@ -57,7 +65,7 @@ def main():
         print("Не имею представления, как до этого дошло")
 
 while True:
-    os.system("cls")
+    clear_console()
     main()
     x = input()
     if (x == 'exit'):

@@ -12,6 +12,14 @@
 
 import os
 
+def clear_console():
+    # если запускается на unix системах: macOS, linux
+    if os.name == 'posix':
+        os.system('clear')
+    # если запускается на windows
+    elif os.name == 'nt':
+        os.system('cls')
+
 def main():
     n = input("Введите число: ")
     if n == 'exit' or n == '': exit(0)
@@ -39,6 +47,6 @@ def main():
             print("Число должно быть больше 0!")
 
 while True:
-    os.system('cls')
+    clear_console()
     main()
     if input() == 'exit': exit(0)
