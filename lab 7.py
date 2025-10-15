@@ -81,3 +81,5 @@ def task_4():
         print( str('.' * (number - len(input_string))) + str(input_string))
     input()
 
+# Задание 5
+clear_console()
