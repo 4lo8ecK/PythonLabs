@@ -18,7 +18,7 @@ def main():
     except ValueError:
         print('Нужно ввести число!')
 
-    finally:
+    else:
 
         print(f"Первые {num} элементов последовательности:\n-> ", end='')
 
