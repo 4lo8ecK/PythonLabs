@@ -53,7 +53,6 @@ def task_2():
         print(f"кол-во букв 'н' всего - {m_count + m_big_count}:\n\t{m_count} строчных\n\t{m_big_count} прописных")
     else:
         print("Нет букв 'н' и 'м'")
-    input()
 
 # Задание 3
 def task_3():
