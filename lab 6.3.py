@@ -6,6 +6,14 @@
 
 import os
 
+def clear_console():
+    # если запускается на unix системах: macOS, linux
+    if os.name == 'posix':
+        os.system('clear')
+    # если запускается на windows
+    elif os.name == 'nt':
+        os.system('cls')
+
 b1 = 0
 
 def main():
@@ -40,7 +48,7 @@ def main():
         else:
             print("Число должно быть больше нуля!")
 while True:
-    os.system('cls')
+    clear_console()
     main()
     cmd = input('\n')
     if cmd == 'exit': exit(0)
