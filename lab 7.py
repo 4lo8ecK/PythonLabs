@@ -1,6 +1,6 @@
 # Лабораторная работа №7
 # Вариант 6
-# Гаврилов Павел ФМ 11-25
+# Гаврилов Павел ФМ-11-25
 
 import os
 
@@ -16,7 +16,7 @@ def clear_console():
 def task_1():
     clear_console()
     print("Задание 1")
-    print("Возвращает буквосочетание из 2 и 4 символа введёного текста")
+    print("Возвращает буквосочетание из 2 и 4 символа введённого текста")
     input_string = input("Введите слово длиной более 4 символов: ")
     if len(input_string) < 4:
         print("Слово должно быть более 4 символов!")
@@ -30,6 +30,13 @@ def task_2():
     print("Выдаёт количество букв 'н' и 'м'")
     input_string = input("Введите любой текст: ")
 
+    n_count = input_string.count('н')
+    m_count = input_string.count('м')
+    n_big_count = input_string.count('Н')
+    m_big_count = input_string.count('М')
+
+    # ТУПОЙ ВАРИАНТ РЕШЕНИЯ!!!
+    '''
     n_count = 0
     m_count = 0
     n_big_count = 0
@@ -44,13 +51,13 @@ def task_2():
             n_big_count += 1
         elif input_string[i] == 'М':
             m_big_count += 1
-
+    '''
     print("Результат:")
     if n_count > 0 or n_big_count > 0:
         print(f"кол-во букв 'н' всего - {n_count + n_big_count}:\n\t{n_count} строчных\n\t{n_big_count} прописных")
 
     if m_count > 0 or m_big_count > 0:
-        print(f"кол-во букв 'н' всего - {m_count + m_big_count}:\n\t{m_count} строчных\n\t{m_big_count} прописных")
+        print(f"кол-во букв 'м' всего - {m_count + m_big_count}:\n\t{m_count} строчных\n\t{m_big_count} прописных")
     else:
         print("Нет букв 'н' и 'м'")
 
