@@ -46,6 +46,9 @@ def task_1() -> None:
     print(res)
 # !task_1() -> None
 
+def task_2() -> None:
+    pass
+
 def task_3() -> None:
     print("Задание 3")
     print("Эта программа выводит произведение наибольшего элемента из первого массива и наименьшего из второго")
@@ -70,3 +73,49 @@ def task_3() -> None:
     
     print("\nРезультат:\n-> ",max(arr_a) * min(arr_c))
 # !task_3() -> None
+
+def task_4() -> None:
+    arr_len = input("Введите длину массива: ")
+    if arr_len == 'exit': exit(0)
+    if arr_len == '': return
+    try:
+        arr_len = int(arr_len)
+    except ValueError:
+        print("Нужно ввести число!")
+        input("Нажмите [Enter]")
+        return
+    
+    arr = rand_list(arr_len)
+    print(f"Массив чисел:\n-> {arr}")
+    for i in range(0, arr_len):
+        if abs(arr[i]) % 2 == 0:
+            print(f"Чётный элемент {arr[i]}, его индекс - {i}")
+# !task_4() -> None
+
+def main() -> None:
+    clear_console()
+    print("Лабораторная работа №9")
+    print("Количество заданий - 4")
+    print("Выберите задание от 1 до 4")
+
+    cmd = input(": ")
+    if cmd == 'exit' or cmd == '':
+        exit(0)
+    if not cmd.isnumeric():
+        print("Команда должна быть числом")
+    else:
+        clear_console()
+        cmd = int(cmd)
+        if 1 <= cmd <= 5:
+            match cmd:
+                case 1: task_1()
+                case 2: task_2()
+                case 3: task_3()
+                case 4: task_4()
+        else:
+            print("Неизвестная команда")
+
+while True:
+    main()
+    cmd = input()
+    if (cmd == 'exit'): exit(0)
