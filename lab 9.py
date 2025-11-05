@@ -47,7 +47,46 @@ def task_1() -> None:
 # !task_1() -> None
 
 def task_2() -> None:
-    pass
+    print("Задание 2")
+    arr_len = input("Введите длину массива: ")
+    if arr_len == 'exit': exit(0)
+    if arr_len == '': return
+
+    w = input("Введите число W: ")
+    if w == 'exit': exit(0)
+    if w == '': return
+
+    try:
+        arr_len = int(arr_len)
+        w = int(w)
+    
+    except ValueError:
+        print("Нужно ввести число!")
+        input("Нажмите [Enter]")
+        return
+
+    arr = rand_list(arr_len, 1, -100, 100)
+
+    print(arr)
+
+    m1 = 0
+    m2 = 0
+    c1 = 0
+    c2 = 0
+
+    for i in arr:
+        if i > w:
+            c1 += i
+            m1 += 1
+        elif i < -w:
+            c2 += i
+            m2 += 1
+    
+    print("\nc1 - сумма элементов списка, которые больше w, m1 - количество таких элементов")
+    print("c2 - сумма элементов списка, которые меньше -w, m2 - количество таких элементов")
+    print(f"\nc1 = {c1}\nm1 = {m1}")
+    print(f"c2 = {c2}\nm2 = {m2}")
+# !task_2() -> None
 
 def task_3() -> None:
     print("Задание 3")
