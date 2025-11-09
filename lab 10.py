@@ -5,7 +5,7 @@
 import random as rnd    # для 'seed()' и 'randint()'
 import time             # для 'time()' - для получения случайного seed'а
 
-EXIT_CODES = ['exit', 'q', 'close']
+EXIT_CODES = ['exit', 'quit', 'close', 'q', 'й', 'учше', 'йгше', 'сдщыу', 'выход']
 
 def clear_console() -> None:
     print('\033c', end='')
@@ -70,31 +70,15 @@ def rand_serial_matrix(
     return res
 # !rand_serial_matrix(int, int, int, int, int, int) -> list
 
-def get_seed() -> int:
-    clear_console()
-    
-    print("Введите сид для генерации случайных списков / многомерных списков")
-    print("Нужно ввести просто любое целочисленное значение")
-    print("Либо нажмите [Enter], и будет применено значение по умолчанию - 0")
-    
-    cmd = input("> ")
-    
-    if cmd == '':
-        clear_console()
-        return 0
-    if cmd == "exit": exit(0)
-
-    try:
-        cmd = int(cmd)
-    except ValueError:
-        print("Нужно ввести целочисленное значение")
-        print("Будет применено значение по умолчанию (0)")
-        input("Нажмите [Enter]")
-        cmd = 0
-    
-    clear_console()
-    return cmd
-# !get_seed() -> int
+def print_matrix(input: list) -> None:
+    print('[', end='')
+    for i in range(len(input)):
+        endl = '\n'
+        if i + 1 == len(input):
+            endl = ''
+        print(f"{input[i]}", end=endl)
+    print(']')
+# print_matrix() -> None
 
 def task_1() -> None:
     seed = int(time.time() * 10000) % 100000
@@ -142,6 +126,40 @@ def task_2() -> None:
     # endloop
 # !task_2() -> None
 
+def task_3() -> None:
+    print("\tЗадание 3\n")
+    arr_len = input("Введите длину масива: ")
+    if arr_len == '': arr_len = 5
+    
+    try:
+        arr_len = int(arr_len)
+    except ValueError:
+        return
+    
+    seed = int(time.time() * 10000) % 10000
+    x_arr = rand_list(arr_len, seed, -50, 50)
+    a_arr = rand_matrix(arr_len, arr_len, seed, -50, 50)
+    
+    print(f"Сид для генерации: {seed} - за основу взято время в unix-time")
+    print(f"\nСгенерированный массив X: {x_arr}\nСгенерированная матрица A:")
+    print_matrix(a_arr)
+    
+    c_arr = []
+    summ = 0
+    for i in range(arr_len):
+        for j in range(arr_len):
+            summ += a_arr[i][j]
+    
+    for i in range(arr_len):
+        if x_arr[i] < summ:
+            c_arr += [summ]
+        else:
+            c_arr += [x_arr[i]]
+    
+    print(f"\nРезультат - С:\n{c_arr}")
+    
+# !task_3() -> None
+
 def main():
     print("\tЛабораторная работа №10\n")
     print("Количество заданий - 3")
@@ -160,12 +178,12 @@ def main():
             match cmd:
                 case 1: task_1()
                 case 2: task_2()
+                case 3: task_3()
         else:
             continue
         l_cmd = input('→ ')
         if l_cmd in EXIT_CODES: break
-
-    # end
+# !main() -> None
 
 while True:
     clear_console()
