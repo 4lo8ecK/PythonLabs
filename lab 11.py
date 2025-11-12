@@ -2,7 +2,11 @@
 # Гаврилов Павел ФМ-11-25
 # Вариант 6
 
-EXIT_KEYS = ['exit', 'q', 'й', 'учше', 'quit', 'йгшк']
+import flwork
+
+#EXIT_KEYS = ['exit', 'q', 'й', 'учше', 'quit', 'йгшк']
+EXIT_KEYS = flwork.get_codes('dat/exit-codes.txt')
+
 
 def print_dict(inp: dict) -> None:
     keys = list(inp.keys())
@@ -84,9 +88,10 @@ def main():
         case 3: task_3()
 
     cmd = input("-> ")
-    if cmd in EXIT_KEYS: exit(0)
-
-    pass
+    if cmd in EXIT_KEYS:
+        print('\033c', end='')
+        exit(0)
+# !main() -> None
 
 # main loop
 while True:
