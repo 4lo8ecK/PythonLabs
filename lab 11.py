@@ -3,6 +3,7 @@
 # Вариант 6
 
 import flwork
+import myui
 
 #EXIT_KEYS = ['exit', 'q', 'й', 'учше', 'quit', 'йгшк']
 EXIT_KEYS = flwork.get_codes('dat/exit-codes.txt')
@@ -67,6 +68,13 @@ def task_3() -> None:
     print_dict(res)
 # !task_3() -> None
 
+functions_list = [task_1, task_2, task_3]
+text_to_print = ['\n\tЛабораторная работа №11\n', 'Выберите задание']
+
+myui.exec(functions_list, text_to_print)
+
+
+'''
 def main():
     print("\033c", end='')
     print("\n\tЛабораторная работа №11\n")
@@ -97,3 +105,4 @@ def main():
 while True:
     print('\033c', end='')
     main()
+'''
