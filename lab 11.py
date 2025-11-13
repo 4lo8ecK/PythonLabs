@@ -2,12 +2,9 @@
 # Гаврилов Павел ФМ-11-25
 # Вариант 6
 
-import flwork
 import myui
 
 #EXIT_KEYS = ['exit', 'q', 'й', 'учше', 'quit', 'йгшк']
-EXIT_KEYS = flwork.get_codes('dat/exit-codes.txt')
-
 
 def print_dict(inp: dict) -> None:
     keys = list(inp.keys())
