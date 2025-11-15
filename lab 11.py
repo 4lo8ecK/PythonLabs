@@ -4,8 +4,6 @@
 
 import myui
 
-#EXIT_KEYS = ['exit', 'q', 'й', 'учше', 'quit', 'йгшк']
-
 def print_dict(inp: dict) -> None:
     keys = list(inp.keys())
     items = list(inp.values())
@@ -24,9 +22,6 @@ _dict = {
     'судно 6': 'обычная обувь',
     'судно 7': 'всё подряд'}
 
-'''def task_1() -> None:
-    print(_dict)
-'''
 def task_1() -> None:
     print("\tЗадание 1\n")
     print("Вывод словаря из 7 элементов")
@@ -34,7 +29,6 @@ def task_1() -> None:
     
     print("Ключ: значение")
     print_dict(_dict)
-
 # !task_1() -> None
 
 # Задание 2
@@ -69,37 +63,3 @@ functions_list = [task_1, task_2, task_3]
 text_to_print = ['\n\tЛабораторная работа №11\n', 'Выберите задание']
 
 myui.exec(functions_list, text_to_print)
-
-
-'''
-def main():
-    print("\033c", end='')
-    print("\n\tЛабораторная работа №11\n")
-    print("Выберите задание")
-
-    cmd = input("-> ")
-    if cmd in EXIT_KEYS:
-        print("\033c", end='')
-        exit(0)
-    try:
-        cmd = int(cmd)
-    except ValueError:
-        return
-
-    print("\033c", end='')
-    match cmd:
-        case 1: task_1()
-        case 2: task_2()
-        case 3: task_3()
-
-    cmd = input("-> ")
-    if cmd in EXIT_KEYS:
-        print('\033c', end='')
-        exit(0)
-# !main() -> None
-
-# main loop
-while True:
-    print('\033c', end='')
-    main()
-'''
