@@ -88,7 +88,6 @@ def main():
     print(f"d = {d}\n")
     mtx = rand_matrix(row=d, colomn=d, _seed=seed, min_value=-10, max_value=10)
     
-
     print("=== Полученная матрица ===")
     print_matrix(mtx)
     print()
