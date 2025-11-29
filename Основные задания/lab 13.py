@@ -3,11 +3,11 @@
 # Гаврилов Павел ФМ-11-25
 
 import random as rnd    # для randint и seed
-import time             # для time() как сид для рандома
+import time             # для time() как сид для рандома но не судьба, пока
 
 import os
 
-DIR_PATH = "lab 13 files"
+DIR_PATH = "lab13-files"
 
 def rand_matrix(
         row:        int = 6,
@@ -54,7 +54,8 @@ if not os.path.exists(DIR_PATH):    # Если нет директории
 fout = open(DIR_PATH + "\\" + "matrix.txt", "w")
 fout.write(mtx_to_str(lst))
 fout.close()
-del lst
+print(mtx_to_str(lst))
+del lst # Удаление ссылок на этот список
 
 # reading matrix from file
 read_mtx = []
