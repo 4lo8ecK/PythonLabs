@@ -3,6 +3,7 @@
 # Гаврилов Павел ФМ-11-25
 
 import math
+import myui as ui
 
 #region TASK 1 
 def func_t1(x: float = 0, a: float = 0) -> float:
@@ -98,12 +99,64 @@ def task_2() -> None:
 
 #region TASK 3
 
-x0 = 0
-n = 10
-
-z0 = 0
-m = 10
+def func_t3(x: float = 0, z: float = 0) -> float:
+    if ((x**2 - z**2) < 0) or ((x+z) == 0): return None
+    return round(((x-z)/(x+z))**2 + 2 * math.exp(math.sqrt(x**2 - z**2)) - (1/3), 3)
 
 
+def task_3() -> None:
+    print("\x1bc", end='')
+    print("\x1b[2mДополнительное задание №2")
+    print("Задание 3\x1b[0m")
 
+    print('Введите значения')
+    x0 = input('x0: ')
+    hx = input('hx: ')
+    n = input('n: ')
+
+    z0 = input('z0: ')
+    hz = input('hz: ')
+    m = input('m: ')
+
+    if x0 == '': x0 = 0
+    if z0 == '': z0 = 0
+    if hx == '': hx = 1
+    if hz == '': hz = 1
+    if n == '': n = 10
+    if m == '': m = 10
+
+    try:
+        x0 = int(x0)
+        z0 = int(z0)
+        hx = int(hx)
+        hz = int(hz)
+        n = int(n)
+        m = int(m)
+    except ValueError:
+        return
+
+    tmp_x = x0
+    tmp_z = z0
+    for i in range(min(n, m)):
+        print(f'при x = {tmp_x}, z = {tmp_z}: ', end='')
+        for j in range(min(n, m)):
+            res = func_t3(x=tmp_x, z=tmp_z)
+            if res != None: print(f'{res}', end='\t')
+            else: print(f' - ', end='\t')
+            tmp_z += hz
+        print('')
+        tmp_z = z0
+        tmp_x += hx
+
+#endregion
+
+#region UI
+
+funcs = [task_1, task_2, task_3]
+texts = [
+    '\x1bc\n\tДополнительное задание №2',
+    'Выберите задание'
+]
+
+ui.exec(funcs=funcs, txt=texts)
 #endregion
