@@ -11,8 +11,8 @@ LAB_DIR_PATH = 'lab14-files'
 CONST_DIR_NAME = 'const-files'
 
 # Названия файлов для
-TASK_1 = '\\task1.txt'
-TASK_2 = '\\task2.txt'
+TASK_1 = 'task1.txt'
+TASK_2 = 'task2.txt'
 
 #region INIT
 def create_file(path: str = "untitled.txt", data: str = "") -> bool:
@@ -40,7 +40,7 @@ def init_prog() -> None:
     # Сцена ареста простого чёрного кота, чинящего примус
     master_and_margarita: str = ''
     try:
-        with open(file=(CONST_DIR_NAME + '\\lab14.txt'), mode='r', encoding='utf-8') as const_file:
+        with open(file=(os.path.join(CONST_DIR_NAME,'lab14.txt')), mode='r', encoding='utf-8') as const_file:
             master_and_margarita = txt.normalize(const_file.read(), '')
             # `txt.normalize(str, str) -> str` - удаляет лишние пробелы из текста
     except FileNotFoundError:
@@ -51,7 +51,7 @@ def init_prog() -> None:
         exit(3)
 
     # Создание файла для 1-го задания
-    if not create_file(path=(LAB_DIR_PATH + TASK_1), data=master_and_margarita):
+    if not create_file(path=os.path.join(LAB_DIR_PATH, TASK_1), data=master_and_margarita):
         print('\x1bcОшибка создания файла {TASK_1}')
         exit(3)
 
@@ -60,7 +60,7 @@ def init_prog() -> None:
     for line in paragraphs:
         line = str(' ' * 5) + line
     res = txt.normalize(paragraphs, '\n')
-    if not create_file(path=(LAB_DIR_PATH + TASK_2), data=res):
+    if not create_file(path=os.path.join(LAB_DIR_PATH, TASK_2), data=res):
         print('\x1bcОшибка создания файла {TASK_1}')
         exit(3)
     return
@@ -73,7 +73,7 @@ def task_1() -> None:
     print('Нужно вставить строку S в начало файла')
     
     s = input('Строка для записи: ')
-    with open(file=LAB_DIR_PATH+TASK_1, mode='r+', encoding='utf-8') as file:
+    with open(file=os.path.join(LAB_DIR_PATH,TASK_1), mode='r+', encoding='utf-8') as file:
         tmp_dat = file.read()
         file.seek(0)
         file.write(s + '\n' + tmp_dat)
@@ -85,7 +85,7 @@ def task_2() -> None:
     print('Задание 2')
     print('Нужно добавить пустые строки между абзацами')
 
-    with open(file=LAB_DIR_PATH+TASK_2, mode='r+', encoding='utf-8') as file:
+    with open(file=os.path.join(LAB_DIR_PATH, TASK_2), mode='r+', encoding='utf-8') as file:
         lines = file.readlines()
         file.seek(0)
         file.write(txt.normalize(lines, '\n'))
