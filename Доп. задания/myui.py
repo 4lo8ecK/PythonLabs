@@ -1,7 +1,8 @@
 # Это попытка автоматизировать процесс создания UI в лабораторных работах
 
-EXIT_CODES = ['exit', 'quit', 'q', 'выход', 'учше', 'йгше', 'й'] 
+import sys
 
+EXIT_CODES = ['exit', 'quit', 'q', 'выход', 'учше', 'йгше', 'й'] 
 
 def _load_codes(path: str) -> list:
     codes = []
@@ -17,7 +18,6 @@ def _load_codes(path: str) -> list:
 def clear_console() -> None:
     print('\033c', end='')
 
-
 def main(funcs: list, txt: list = []) -> None:
     
     # Вывод в консоль данных
@@ -25,7 +25,7 @@ def main(funcs: list, txt: list = []) -> None:
         print(i)
     
     cmd = input('→ ')
-    if cmd in EXIT_CODES: exit(0)
+    if cmd in EXIT_CODES: sys.exit(0)
 
     try:
         cmd = int(cmd)

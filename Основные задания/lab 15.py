@@ -3,12 +3,15 @@
 # Гаврилов Павел ФМ-11-25
 
 import os
+import myui
 
 COMMANDS_STR = ['DEPOSIT', 'WITHDRAW', 'BALANCE', 'TRANSFER', 'INCOME']
 ERR_MSG = 'ERROR'
 
 DIR_NAME = 'lab15-files'
 DATA_BASE_FILE = 'comands'
+
+LAB_HEAD = '\x1bc\n\t\x1b[1m\x1b[3m\x1b[21mЛабораторная работа №15\x1b[0m\n'
 
 g_clients = {}
 
@@ -103,46 +106,9 @@ def parce_line(line: str) -> bool:
         return
     args = line[1:len(line)]
     return FUNCTIONS_LIST[func_index](*args)
-    
-#region old solution
-# def exec_comands() -> None:
-#     for _cmd in read_file():
-#         if _cmd == '': continue
-#         _cmd = _cmd.split()
-#         if _cmd[0] in COMMANDS_STR:
-#             # deposit
-#             if _cmd[0] == COMMANDS_STR[0]:
-#                 deposit(_cmd[1], int(_cmd[2]))
-#             # withdraw
-#             elif _cmd[0] ==  COMMANDS_STR[1]:
-#                 withdraw(_cmd[1], int(_cmd[2]))
-#             # balance
-#             elif _cmd[0] == COMMANDS_STR[2]:
-#                 bal = balance(_cmd[1])
-#                 if bal == None:
-#                     print(ERR_MSG)
-#                 else:
-#                     print(bal)
-#             # transfer
-#             elif _cmd[0] == COMMANDS_STR[3]:
-#                 transfer(_cmd[1], _cmd[2], int(_cmd[3]))
-#             # income
-#             elif _cmd[0] == COMMANDS_STR[4]:
-#                 income(int(_cmd[1]))
-#             else:
-#                 continue
 #endregion
-
-# deposit('Ivanov', 100)
-# income(5)
-# print(balance('Ivanov'))
-# transfer('Ivanov', 'Petrov', 50)
-# withdraw('Petrov', 100)
-# print(balance('Petrov'))
-# print(balance('Sidorov'))
-#endregion
-
-commands = [
+#region UI
+commands_from_task = [
     'DEPOSIT Ivanov 100',
     'INCOME 5',
     'BALANCE Ivanov',
@@ -151,15 +117,49 @@ commands = [
     'BALANCE Petrov',
     'BALANCE Sidorov'
 ]
-init_prog(commands)
 
-with open(file=os.path.join(DIR_NAME, DATA_BASE_FILE), mode='r', encoding='utf-8') as file:
-    while True:
-        cmd = file.readline()
-        if not cmd:
-            break
-        res = parce_line(cmd)
-        if res == None:
-            print(ERR_MSG) 
-        elif isinstance(res, int) and not isinstance(res, bool):
-            print(res)
+def run_task() -> None:
+    print(LAB_HEAD)
+    print('\x1b[3m\x1b[4mВывод:\x1b[0m')
+
+    with open(file=os.path.join(DIR_NAME, DATA_BASE_FILE), mode='r', encoding='utf-8') as file:
+        balance_counter = 1
+        while True:
+            cmd = file.readline()
+            if not cmd:
+                break
+            res = parce_line(cmd)
+            if not isinstance(res, bool):
+                txt_to_write = ''
+                if res == None:
+                    txt_to_write = ERR_MSG 
+                elif isinstance(res, int):
+                    txt_to_write = str(res)
+                space = ' ' * (3 - len(str(balance_counter)))
+                print(f'\x1b[100m{space}{balance_counter}|\x1b[0m {txt_to_write}')
+                balance_counter += 1
+    print('')
+    g_clients.clear()
+
+def show_commands() -> None:
+    print(LAB_HEAD)
+    print('\x1b[3m\x1b[4mКоманды в файле:\x1b[0m')
+    
+    commands = read_file()
+    length = len(commands)
+    for i in range(length):
+        space = ' ' * (len(str(length)) - len(str(i)))
+        print(f'\x1b[100m{space}{i}|\x1b[0m {commands[i]}', end='')
+    print('')
+
+ui_txt = [
+    LAB_HEAD,
+    'Выберите опцию:',
+    '\t[1] - вывод результата',
+    '\t[2] - показать спиок команд'
+]
+funcs_list = [run_task, show_commands]
+
+init_prog(commands_from_task)
+myui.exec(funcs_list, ui_txt)
+#endregion
