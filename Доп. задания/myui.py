@@ -1,5 +1,7 @@
 # Это попытка автоматизировать процесс создания UI в лабораторных работах
 
+import sys
+
 EXIT_CODES = ['exit', 'quit', 'q', 'выход', 'учше', 'йгше', 'й'] 
 
 
@@ -25,7 +27,7 @@ def main(funcs: list, txt: list = []) -> None:
         print(i)
     
     cmd = input('→ ')
-    if cmd in EXIT_CODES: exit(0)
+    if cmd in EXIT_CODES: sys.exit(0)
 
     try:
         cmd = int(cmd)

@@ -3,15 +3,17 @@
 # Гаврилов Павел ФМ-11-25
 
 import os
+import myui
 
 COMMANDS_STR = ['DEPOSIT', 'WITHDRAW', 'BALANCE', 'TRANSFER', 'INCOME']
 ERR_MSG = 'ERROR'
-
 
 DIR_NAME = 'lab15-files'
 DATA_BASE_FILE = 'comands'
 
 g_clients = {}
+
+LAB_HEAD = '\x1bc\n\t\x1b[1m\x1b[3m\x1b[21mЛабораторная работа №15\x1b[0m\n'
 
 #region MAIN METHODS
 def deposit(client: str, balance: int = 0) -> bool:
@@ -90,7 +92,8 @@ def init_prog(commands: list = []) -> None:
         file.writelines(commands)
 #endregion
 #region PARCER
-def exec_comands() -> None:
+def exec_comands() -> bool:
+    balance_counter = 1
     for _cmd in read_file():
         if _cmd == '': continue
         _cmd = _cmd.split()
@@ -103,11 +106,16 @@ def exec_comands() -> None:
                 withdraw(_cmd[1], int(_cmd[2]))
             # balance
             elif _cmd[0] == COMMANDS_STR[2]:
+                txt_to_print = ''
                 bal = balance(_cmd[1])
                 if bal == None:
-                    print(ERR_MSG)
+                    txt_to_print = ERR_MSG
                 else:
-                    print(bal)
+                    txt_to_print = bal
+                space = ' ' * (len(_cmd) - len(str(balance_counter)))
+                print(f'\x1b[100m{space}{balance_counter}|\x1b[0m {txt_to_print}')
+
+                balance_counter += 1
             # transfer
             elif _cmd[0] == COMMANDS_STR[3]:
                 transfer(_cmd[1], _cmd[2], int(_cmd[3]))
@@ -116,6 +124,8 @@ def exec_comands() -> None:
                 income(int(_cmd[1]))
             else:
                 continue
+    return True
+    
 # deposit('Ivanov', 100)
 # income(5)
 # print(balance('Ivanov'))
@@ -135,4 +145,32 @@ commands = [
     'BALANCE Sidorov'
 ]
 init_prog(commands)
-exec_comands()
+
+def run_prog() -> None:
+    print(LAB_HEAD)
+    print('Результаты вывода:\n')
+    exec_comands()
+    print('')
+    g_clients.clear()
+    
+
+def show_commands() -> None:
+    print(LAB_HEAD)
+    
+    commands = read_file()
+    length = len(commands)
+    for i in range(length):
+        space = ' ' * (len(str(length)) - len(str(i)))
+        print(f'\x1b[100m{space}{i}|\x1b[0m {commands[i]}', end='')
+    print('')
+
+
+ui_txt = [
+    LAB_HEAD,
+    'Выберите опцию:',
+    '\t[1] - вывод результата',
+    '\t[2] - показать спиок команд'
+]
+funcs_list = [run_prog, show_commands]
+
+myui.exec(funcs_list, ui_txt)
