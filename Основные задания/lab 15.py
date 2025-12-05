@@ -7,7 +7,6 @@ import os
 COMMANDS_STR = ['DEPOSIT', 'WITHDRAW', 'BALANCE', 'TRANSFER', 'INCOME']
 ERR_MSG = 'ERROR'
 
-
 DIR_NAME = 'lab15-files'
 DATA_BASE_FILE = 'comands'
 
@@ -73,6 +72,10 @@ def income(proc: int) -> bool:
     except:
         return False
 # !income(int) -> bool
+
+# порядок функций ДОЛЖЕН быть идентичным в FUNCTIONS_LIST и COMMANDS_STR
+FUNCTIONS_LIST = [deposit, withdraw, balance, transfer, income]
+
 #endregion
 #region INIT
 def read_file() -> list:
@@ -90,32 +93,46 @@ def init_prog(commands: list = []) -> None:
         file.writelines(commands)
 #endregion
 #region PARCER
-def exec_comands() -> None:
-    for _cmd in read_file():
-        if _cmd == '': continue
-        _cmd = _cmd.split()
-        if _cmd[0] in COMMANDS_STR:
-            # deposit
-            if _cmd[0] == COMMANDS_STR[0]:
-                deposit(_cmd[1], int(_cmd[2]))
-            # withdraw
-            elif _cmd[0] ==  COMMANDS_STR[1]:
-                withdraw(_cmd[1], int(_cmd[2]))
-            # balance
-            elif _cmd[0] == COMMANDS_STR[2]:
-                bal = balance(_cmd[1])
-                if bal == None:
-                    print(ERR_MSG)
-                else:
-                    print(bal)
-            # transfer
-            elif _cmd[0] == COMMANDS_STR[3]:
-                transfer(_cmd[1], _cmd[2], int(_cmd[3]))
-            # income
-            elif _cmd[0] == COMMANDS_STR[4]:
-                income(int(_cmd[1]))
-            else:
-                continue
+def parce_line(line: str) -> bool:
+    # print(line)
+    line: list = line.split()
+    func_index: int = -1
+    try:
+        func_index: int = COMMANDS_STR.index(line[0])
+    except ValueError:
+        return
+    args = line[1:len(line)]
+    return FUNCTIONS_LIST[func_index](*args)
+    
+#region old solution
+# def exec_comands() -> None:
+#     for _cmd in read_file():
+#         if _cmd == '': continue
+#         _cmd = _cmd.split()
+#         if _cmd[0] in COMMANDS_STR:
+#             # deposit
+#             if _cmd[0] == COMMANDS_STR[0]:
+#                 deposit(_cmd[1], int(_cmd[2]))
+#             # withdraw
+#             elif _cmd[0] ==  COMMANDS_STR[1]:
+#                 withdraw(_cmd[1], int(_cmd[2]))
+#             # balance
+#             elif _cmd[0] == COMMANDS_STR[2]:
+#                 bal = balance(_cmd[1])
+#                 if bal == None:
+#                     print(ERR_MSG)
+#                 else:
+#                     print(bal)
+#             # transfer
+#             elif _cmd[0] == COMMANDS_STR[3]:
+#                 transfer(_cmd[1], _cmd[2], int(_cmd[3]))
+#             # income
+#             elif _cmd[0] == COMMANDS_STR[4]:
+#                 income(int(_cmd[1]))
+#             else:
+#                 continue
+#endregion
+
 # deposit('Ivanov', 100)
 # income(5)
 # print(balance('Ivanov'))
@@ -135,4 +152,14 @@ commands = [
     'BALANCE Sidorov'
 ]
 init_prog(commands)
-exec_comands()
+
+with open(file=os.path.join(DIR_NAME, DATA_BASE_FILE), mode='r', encoding='utf-8') as file:
+    while True:
+        cmd = file.readline()
+        if not cmd:
+            break
+        res = parce_line(cmd)
+        if res == None:
+            print(ERR_MSG) 
+        elif isinstance(res, int) and not isinstance(res, bool):
+            print(res)
