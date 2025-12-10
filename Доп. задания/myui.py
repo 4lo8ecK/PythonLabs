@@ -4,7 +4,6 @@ import sys
 
 EXIT_CODES = ['exit', 'quit', 'q', 'выход', 'учше', 'йгше', 'й'] 
 
-
 def _load_codes(path: str) -> list:
     codes = []
     try:
@@ -18,7 +17,6 @@ def _load_codes(path: str) -> list:
 
 def clear_console() -> None:
     print('\033c', end='')
-
 
 def main(funcs: list, txt: list = []) -> None:
     
